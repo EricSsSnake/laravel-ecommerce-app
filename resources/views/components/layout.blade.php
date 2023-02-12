@@ -22,27 +22,7 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navmenu">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a href='{{ route('shopIndex') }}' class="nav-link">Shop</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('cartIndex') }}" class="nav-link">
-                            Cart
-                            @if (Cart::instance('default')->count() > 0)
-                                <span class="rounded-5 text-dark" style="background-color: rgb(255, 251, 0); padding: .1rem .4rem">
-                                    {{Cart::instance('default')->count()}}
-                                </span>
-                            @endif
-                        </a>
-                    </li>
-                </ul>
+                {{ menu('navbar', 'partials.menus.main')}}
             </div>
         </div>
     </nav>
@@ -52,13 +32,7 @@
     </main>
 
     <footer class="text-light position-relative p-4 text-center" style="background-color: #333">
-        <div class="container w-75 d-flex justify-content-between align-items-center">
-                <p class="lead m-0">Made with <i style="color: pink" class="bi bi-heart color-warning"></i> by Erfan</p>
-
-                <a href="#" class="postion-absolute bottom-0 end-0">
-                    <i class="bi bi-arrow-up-circle h1"></i>
-                </a>
-        </div>
+        {{menu('footer', 'partials.menus.footer')}}
     </footer>
 </body>
 </html>

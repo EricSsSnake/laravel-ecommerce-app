@@ -35,7 +35,7 @@
                             <div class="card border-0">
                                 <div class="card-body text-center">
                                     <a class="text-dark text-decoration-none" href=" {{ route('shopShow', ['product' => $product->slug]) }}">
-                                        <img src='{{ asset('images/products/' . $product->slug . '.jpg') }}' alt="">
+                                        <img src='{{ $product->image && file_exists('storage/' . $product->image) ? asset('storage/' . $product->image) : asset('images/not-found.jpg') }}' alt="">
                                     </a>
                                     
                                     <a class="text-dark text-decoration-none" href="{{ route('shopShow', ['product' => $product->slug]) }}">

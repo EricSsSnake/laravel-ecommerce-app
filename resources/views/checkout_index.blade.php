@@ -272,6 +272,24 @@
 
     <section>
         <div class="container my-5 w-75">
+            <div class="my-1">
+                @if (session()->has('success_message'))
+                    <div class="p-3 mb-3 w-75" style="background-color: #dbedd2; color: #52634e">
+                        {{session()->get('success_message')}}
+                    </div>
+                @endif
+    
+                @if (count($errors) > 0)
+                <div class="p-3 mb-3"> 
+                    <ul class="list-unstyled">
+                        @foreach ($errors->all() as $error)
+                            <li class="p-3 mb-3 w-75" style="background-color: #f0d9d8; color: #af8b88">{{$error}}</li>                      
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+            </div>
+
             <h2 style="font-weight: 700">Checkout</h2>
 
             <div class="d-flex justify-content-between align-items-start">
@@ -381,7 +399,7 @@
                 </div>
 
                 <div class="" style="width: 45%;">
-                    <div class="my-5">
+                    <div class="my-5 mb-3">
                         <h4 style="font-size: 1.2rem">Your Order</h4>
 
                         <div>
@@ -391,7 +409,7 @@
                                     <div class="d-flex justify-content-start align-items-center">
                                         <div class="w-25">
                                             <a href="{{ route('shopShow', $item->model->slug) }}">
-                                                <img class="w-100" src="{{ asset('images/products/' . $item->model->slug . '.jpg') }}" alt="">
+                                                <img class="w-100" src="{{ $item->model->image && file_exists('storage/' . $item->model->image) ? asset('storage/' . $item->model->image) : asset('images/not-found.jpg') }}" alt="">
                                             </a>
                                         </div>
             
@@ -415,14 +433,53 @@
                             @endif
                         </div>
 
-                        <div class="d-flex justify-content-between align-items-center py-4 px-3 border-top border-bottom">
-                            <div style="font-weight: 700; font-size: 1.3rem">Total:</div>
+                        <div class="py-4 pb-4">
+                            <div class="d-flex justify-content-between align-items-center py-2 px-3">
+                                <div>Subtotal:</div>
 
-                            <div style="font-weight: 700; font-size: 1.3rem">
-                                ${{Cart::total() / 100}}
+                                <div>${{Cart::subtotal() / 100}}</div>
+                            </div>
+
+                            @if (session()->has('coupon'))
+                                <div class="d-flex justify-content-between align-items-center px-3">
+                                    <div class="d-flex align-items-center justify-content-start w-25">
+                                        <span class="">Discount: ({{ session()->get('coupon')['code'] }})</span>
+
+                                        <form class="" action="{{ route('couponDestroy') }}" method="post" style="display: inline; box-shadow: none">
+                                            @csrf
+                                            @method('delete')
+                                            <input class="btn" type="submit" value="Remove" name="submit" style="font-size: .8rem; font-weight: 500">
+                                        </form>
+                                    </div>
+
+                                    <div>
+                                        - ${{ session()->get('coupon')['discount'] / 100 }}
+                                    </div>
+                                </div>
+                            @endif
+
+                            <div class="d-flex justify-content-between align-items-center py-2 pb-4 px-3 border-bottom border-2">
+                                <div style="font-weight: 700; font-size: 1.3rem">Total:</div>
+
+                                <div style="font-weight: 700; font-size: 1.3rem">
+                                    ${{ (Cart::total() / 100) - $discount / 100 }}
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    @unless (session()->has('coupon'))
+                        <div>
+                            <div class="my-3" style="font-weight: 500">Have a Code?</div>
+                            <div class="w-100">
+                                <form class="d-flex" action="{{ route('couponStore') }}" method="post">
+                                    @csrf
+                                    <input class="w-75 mx-1 py-2" type="text" name="coupon_code">
+                                    <input class="w-25 py-2 btn border border-2 border-secondary" type="submit" value="Apply" name="submit">
+                                </form>
+                            </div>
+                        </div>
+                    @endunless
                 </div>
             </div>
         </div>

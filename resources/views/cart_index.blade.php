@@ -23,9 +23,9 @@
 
             @if (count($errors) > 0)
             <div class="p-3 mb-3"> 
-                <ul>
+                <ul class="list-unstyled">
                     @foreach ($errors->all() as $error)
-                        <li>{{$error}}</li>                      
+                        <li class="p-3 mb-3 w-75" style="background-color: #f0d9d8; color: #af8b88">>{{$error}}</li>                      
                     @endforeach
                 </ul>
             </div>
@@ -41,7 +41,7 @@
                         <div class="d-flex justify-content-start align-items-center">
                             <div>
                                 <a href="{{ route('shopShow', $item->model->slug) }}">
-                                    <img class="w-50" src="{{ asset('images/products/' . $item->model->slug . '.jpg') }}" alt="">
+                                    <img class="w-50" src="{{ $item->model->image && file_exists('storage/' . $item->model->image) ? asset('storage/' . $item->model->image) : asset('images/not-found.jpg') }}" alt="">
                                 </a>
                             </div>
 
@@ -133,7 +133,7 @@
                     <div class="d-flex justify-content-start align-items-center">
                         <div>
                             <a href="{{ route('shopShow', $item->model->slug) }}">
-                                <img class="w-50" src="{{ asset('images/products/' . $item->model->slug . '.jpg') }}" alt="">
+                                <img class="w-50" src="{{ $item->model->image && file_exists('storage/' . $item->model->image) ? asset('storage/' . $item->model->image) : asset('images/not-found.jpg') }}" alt="">
                             </a>
                         </div>
 

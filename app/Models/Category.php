@@ -9,6 +9,8 @@ class Category extends Model
 {
     use HasFactory;
 
+    protected $table = 'category';
+
     function products()
     {
         return $this->belongsToMany('App\Models\Product');

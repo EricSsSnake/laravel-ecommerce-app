@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class shopController extends Controller
 {
-    function index(Request $request)
+    function index()
     {
         $categories = Category::all();
         $pagination = 9;
@@ -21,7 +21,7 @@ class shopController extends Controller
             $categoryName = optional($categories->where('slug', request()->category)->first())->name;
         } else {
 
-            $products = Product::take(12)->inRandomOrder();
+            $products = Product::where('featured', true)->take(12)->inRandomOrder();
             $categoryName = 'All';
         }
 

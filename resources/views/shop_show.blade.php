@@ -20,7 +20,7 @@
     <section class="my-5">
         <div class="container w-75 d-flex justify-content-between align-items-center">
             <div class="w-50">
-                <img class="border border-2 rounded-0 p-5 w-75" src='{{ asset('images/products/' . $product->slug . '.jpg') }}' alt="">
+                <img class="border border-2 rounded-0 p-5 w-75" src='{{ $product->image && file_exists('storage/' . $product->image) ? asset('storage/' . $product->image) : asset('images/not-found.jpg') }}' alt="">
             </div>
 
             <div class="card border-0 w-50">
@@ -30,7 +30,7 @@
                     </h3>
 
                     <span class="text-muted" style="font-weight: 500">
-                        {{$product->details}}
+                        {{ $product->details }}
                     </span>
 
                     <div class="h3" style="font-weight: 700">
@@ -38,7 +38,7 @@
                     </div>
 
                     <p class="my-3">
-                        {{$product->description}}
+                        {!! $product->description !!}
                     </p>
 
                     <form action="{{ route('cartStore') }}" method="POST">

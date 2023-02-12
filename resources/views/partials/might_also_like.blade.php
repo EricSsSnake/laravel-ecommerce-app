@@ -4,19 +4,19 @@
 
         <div class="d-flex">
             @foreach ($mightAlsoLike as $item)
-                    <div class="card border-2 w-25 mx-2">
-                        <div class="card-body text-center">
-                            <a class="text-dark text-decoration-none" href=" {{ route('shopShow', ['product' => $item->slug]) }}">
-                                <img class="w-75" src='{{ asset('images/products/' . $item->slug . '.jpg') }}' alt="">
-                            </a>
-                            
-                            <a class="text-dark text-decoration-none" href="{{ route('shopShow', ['product' => $item->slug]) }}">
-                                <p class="font-bold my-2">{{$item->name}}</p>
-                            </a>
+                <div class="card border-2 w-25 mx-2">
+                    <div class="card-body text-center">
+                        <a class="text-dark text-decoration-none" href=" {{ route('shopShow', ['product' => $item->slug]) }}">
+                            <img class="w-75" src='{{ $item->image && file_exists('storage/' . $item->image) ? asset('storage/' . $item->image) : asset('images/not-found.jpg') }}' alt="">
+                        </a>
+                        
+                        <a class="text-dark text-decoration-none" href="{{ route('shopShow', ['product' => $item->slug]) }}">
+                            <p class="font-bold my-2">{{$item->name}}</p>
+                        </a>
 
-                            <span class="text-muted">{{'$'. $item->price / 100}}</span>
-                        </div>
+                        <span class="text-muted">{{'$'. $item->price / 100}}</span>
                     </div>
+                </div>
             @endforeach
         </div>
     </div>
