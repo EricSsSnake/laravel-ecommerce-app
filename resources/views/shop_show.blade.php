@@ -18,13 +18,31 @@
     </section>
 
     <section class="my-5">
-        <div class="container w-75 d-flex justify-content-between align-items-center">
+        <div class="container w-75 d-flex justify-content-between align-items-start">
             <div class="w-50">
-                <img class="border border-2 rounded-0 p-5 w-75" src='{{ $product->image && file_exists('storage/' . $product->image) ? asset('storage/' . $product->image) : asset('images/not-found.jpg') }}' alt="">
+                <div>
+                    <div>
+                       <img id="currentImage" class="active border border-2 rounded-0 p-5 w-75" src='{{ $product->image && file_exists('storage/' . $product->image) ? asset('storage/' . $product->image) : asset('images/not-found.jpg') }}' alt="">
+                    </div>
+
+                    <div class="product-images">
+                        <div class="product-thumbnails selected">
+                            <img class="w-75" src='{{ $product->image && file_exists('storage/' . $product->image) ? asset('storage/' . $product->image) : asset('images/not-found.jpg') }}' alt="">
+                        </div>
+                        
+                        @if ($product->images)
+                            @foreach (json_decode($product->images, true) as $image)
+                                <div class="d-flex align-items-center product-thumbnails">
+                                    <img class="w-75" src="{{ file_exists('storage/' . $image) ? asset('storage/' . $image) : asset('images/not-found.jpg') }}" alt="">
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
+                </div>
             </div>
 
             <div class="card border-0 w-50">
-                <div class="">
+                <div>
                     <h3 class="mb-5">
                         {{$product->name}}
                     </h3>
@@ -54,4 +72,23 @@
     </section>
 
     @include('partials/might_also_like')
+
+    <script>
+        const currentImage = document.querySelector('#currentImage');
+        const images = document.querySelectorAll('.product-thumbnails');
+
+        images.forEach((element) => element.addEventListener('click', thumbnailClick));
+
+        function thumbnailClick(e) {
+            currentImage.classList.remove('active');
+
+            currentImage.addEventListener('transitionend', () => {
+                currentImage.src = this.querySelector('img').src;
+                currentImage.classList.add('active');
+            })
+
+            thumbnails.forEach((element) => element.classList.remove('selected'));
+            this.classList.add('selected');
+        }
+    </script>
 </x-layout>

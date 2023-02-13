@@ -1,0 +1,31 @@
+.product-images {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 15px;
+    padding-top: 20px;
+    width: 75%;
+}
+
+.product-thumbnails {
+    cursor: pointer;
+    min-height: 66px;
+    border: 1px solid lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.product-thumbnails:hover {
+    border: 1px solid #979797;
+}
+
+.product-images .selected {
+    border: 1px solid #979797;
+}
+
+#currentImage {
+    opacity: 0;
+    transition: opacity 0.1s ease-in-out;
+}
+#currentImage.active {
+    opacity: 1;
+}
