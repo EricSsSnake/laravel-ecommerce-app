@@ -15,7 +15,7 @@
 <body>
     <nav class="navbar py-3 navbar-expand-lg navbar-dark" style="background-color: {{$bg ?? "#212529"}}">
         <div class="container w-75">
-            <a href="/" class="navbar-brand">Laravel E-commerce</a>
+            <a href="/" class="navbar-brand">Erfan E-commerce</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
                 <span class="navbar-toggler-icon"></span>
@@ -23,6 +23,7 @@
 
             <div class="collapse navbar-collapse" id="navmenu">
                 {{ menu('navbar', 'partials.menus.main')}}
+                @include('partials/menus/right_bar')
             </div>
         </div>
     </nav>

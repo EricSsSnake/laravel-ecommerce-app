@@ -266,7 +266,7 @@
 <body>
     <nav class="navbar py-3 navbar-dark" style="background-color: #333">
         <div class="container w-75">
-            <a href="{{ route('landingPage') }}" class="navbar-brand" style="font-weight: 500">Laravel E-commerce</a>
+            <a href="{{ route('landingPage') }}" class="navbar-brand" style="font-weight: 500">Erfan E-commerce</a>
         </div>
     </nav>
 
@@ -302,12 +302,22 @@
 
                             <div class="form-group my-3">
                                 <label for="email">Email</label><br>
-                                <input class="form-control w-100" type="email" name="email">
+                                
+                                @if (auth()->user())
+                                    <input class="form-control w-100" type="email" name="email" value="{{ auth()->user()->email }}">
+                                @else
+                                    <input class="form-control w-100" type="email" name="email" value="{{ old('email') }}">
+                                @endif
                             </div>
 
                             <div class="form-group my-3">
                                 <label for="name">Name</label><br>
-                                <input class="form-control w-100" type="text" name="name">
+
+                                @if (auth()->user())
+                                    <input class="form-control w-100" type="text" name="name" value="{{ auth()->user()->name }}">
+                                @else
+                                    <input class="form-control w-100" type="text" name="name" value="{{ old('name') }}">
+                                @endif
                             </div>
 
                             <div class="form-group my-3">

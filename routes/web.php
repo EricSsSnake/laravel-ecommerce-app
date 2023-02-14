@@ -2,6 +2,7 @@
 
 use App\Product;
 use TCG\Voyager\Facades\Voyager;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShopController;
@@ -36,12 +37,16 @@ Route::post('/cart/switchToSaveForLater/{product}', [CartController::class, 'swi
 Route::delete('/saveForLater/{product}', [SaveForLaterController::class, 'destroy'])->name('saveForLaterDestroy');
 Route::post('/saveForLater/switchToCart/{product}', [SaveForLaterController::class, 'switchToCart'])->name('saveForLaterSwitchToCart');
 
-Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkoutIndex');
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkoutIndex')->middleware('auth');
+Route::get('/guestCheckout', [CheckoutController::class, 'index'])->name('guestCheckoutIndex')->middleware('guest');
 
 Route::post('/coupon', [CouponController::class, 'store'])->name('couponStore');
 Route::delete('/coupon', [CouponController::class, 'destroy'])->name('couponDestroy');
 
-
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
