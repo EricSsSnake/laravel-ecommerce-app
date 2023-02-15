@@ -23,30 +23,35 @@ use App\Http\Controllers\SaveForLaterController;
 |
 */
 
-Route::get('/', [ProductController::class, 'index'])->name('landingPage');
+Route::redirect('/', '/en');
 
-Route::get('/shop', [ShopController::class, 'index'])->name('shopIndex');
-Route::get('/shop/{product}', [ShopController::class, 'show'])->name('shopShow');
+Route::group(['prefix' => '{lang}'], function () {
 
-Route::get('/cart', [CartController::class, 'index'])->name('cartIndex');
-Route::post('/cart', [CartController::class, 'store'])->name('cartStore');
-Route::delete('/cart/{product}', [CartController::class, 'destroy'])->name('cartDestroy');
-Route::patch('/cart/{product}', [CartController::class, 'update'])->name('cartUpdate');
+    Route::get('/', [ProductController::class, 'index'])->name('landingPage');
 
-Route::post('/cart/switchToSaveForLater/{product}', [CartController::class, 'switchToSaveForLater'])->name('cartSwitchToSaveForLater');
-Route::delete('/saveForLater/{product}', [SaveForLaterController::class, 'destroy'])->name('saveForLaterDestroy');
-Route::post('/saveForLater/switchToCart/{product}', [SaveForLaterController::class, 'switchToCart'])->name('saveForLaterSwitchToCart');
+    Route::get('/shop', [ShopController::class, 'index'])->name('shopIndex');
+    Route::get('/shop/{product}', [ShopController::class, 'show'])->name('shopShow');
 
-Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkoutIndex')->middleware('auth');
-Route::get('/guestCheckout', [CheckoutController::class, 'index'])->name('guestCheckoutIndex')->middleware('guest');
+    Route::get('/cart', [CartController::class, 'index'])->name('cartIndex');
+    Route::post('/cart', [CartController::class, 'store'])->name('cartStore');
+    Route::delete('/cart/{product}', [CartController::class, 'destroy'])->name('cartDestroy');
+    Route::patch('/cart/{product}', [CartController::class, 'update'])->name('cartUpdate');
 
-Route::post('/coupon', [CouponController::class, 'store'])->name('couponStore');
-Route::delete('/coupon', [CouponController::class, 'destroy'])->name('couponDestroy');
+    Route::post('/cart/switchToSaveForLater/{product}', [CartController::class, 'switchToSaveForLater'])->name('cartSwitchToSaveForLater');
+    Route::delete('/saveForLater/{product}', [SaveForLaterController::class, 'destroy'])->name('saveForLaterDestroy');
+    Route::post('/saveForLater/switchToCart/{product}', [SaveForLaterController::class, 'switchToCart'])->name('saveForLaterSwitchToCart');
 
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkoutIndex')->middleware('auth');
+    Route::get('/guestCheckout', [CheckoutController::class, 'index'])->name('guestCheckoutIndex')->middleware('guest');
+
+    Route::post('/coupon', [CouponController::class, 'store'])->name('couponStore');
+    Route::delete('/coupon', [CouponController::class, 'destroy'])->name('couponDestroy');
+
+    Route::group(['prefix' => 'admin'], function () {
+        Voyager::routes();
+    });
+
+    Auth::routes();
+
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

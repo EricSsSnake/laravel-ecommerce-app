@@ -1,7 +1,7 @@
 <ul class="navbar-nav ms-auto my-1">
     @foreach ($items as $menu_item)
         <li class="nav-item mx-1">
-            <a href='{{ $menu_item->link() }}' class="nav-link">
+            <a href='{{ route($menu_item->route ? $menu_item->route : 'landingPage', App::getLocale()) }}' class="nav-link">
                 {{$menu_item->title}}
 
                 @if ($menu_item->title == 'Cart')

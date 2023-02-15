@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class shopController extends Controller
 {
@@ -36,7 +37,7 @@ class shopController extends Controller
         return view('shop_index')->with(['products' => $products, 'categories' => $categories, 'categoryName' => $categoryName]);
     }
 
-    function show($slug)
+    function show($lang, $slug)
     {
         $product = Product::where('slug', $slug)->firstOrFail();
 

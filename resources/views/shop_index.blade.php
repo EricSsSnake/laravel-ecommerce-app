@@ -49,11 +49,11 @@
         <div class="container w-75">
             <ul class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a class="text-decoration-none" href="{{ route('landingPage') }}">Home</a>
+                    <a class="text-decoration-none" href="{{ route('landingPage', App::getLocale()) }}">{{__('Home')}}</a>
                 </li>
 
                 <li class="breadcrumb-item">
-                    <a class="text-muted text-decoration-none" href="{{ route('shopIndex') }}">Shop</a>
+                    <a class="text-muted text-decoration-none" href="{{ route('shopIndex', App::getLocale()) }}">{{__('Shop')}}</a>
                 </li>
             </ul>
         </div>
@@ -64,15 +64,15 @@
         <div class="container w-75 d-flex justify-content-between">
             <div class="w-25">
                 <div class="mb-4">
-                    <div class="h6" style="font-weight: 700">By Category</div>
+                    <div class="h6" style="font-weight: 700">{{__('By Category')}}</div>
                     <ul class="list-unstyled">
                         <li style="font-weight: {{request()->category == '' ? '500' : '400'}}">
-                            <a class="text-dark text-decoration-none" href="{{ route('shopIndex') }}">All</a>
+                            <a class="text-dark text-decoration-none" href="{{ route('shopIndex', App::getLocale()) }}">{{__('All')}}</a>
                         </li>
 
                         @foreach ($categories as $category)
                             <li style="font-weight: {{request()->category == $category->slug ? '500' : '400'}}">
-                                <a class="text-dark text-decoration-none" href="{{ route('shopIndex', ['category' => $category->slug]) }}">{{$category->name}}</a>
+                                <a class="text-dark text-decoration-none" href="{{ route('shopIndex', ['category' => $category->slug, 'lang' => App::getLocale()]) }}">{{$category->name}}</a>
                             </li>
                         @endforeach
                     </ul>
@@ -85,10 +85,10 @@
                         <h3>{{$categoryName}}</h3>
 
                         <div>
-                            <strong style="font-size: 1.2rem">Price:</strong>
-                            <a style="font-size: 1.2rem" href="{{ route('shopIndex', ['category' => request()->category, 'sort' => 'high_low']) }}"><i class="bi bi-sort-down"></i></a>
+                            <strong style="font-size: 1.2rem">{{__('Price')}}:</strong>
+                            <a style="font-size: 1.2rem" href="{{ route('shopIndex', ['category' => request()->category, 'sort' => 'high_low', 'lang' => App::getLocale()]) }}"><i class="bi bi-sort-down"></i></a>
 
-                            <a style="font-size: 1.2rem" href="{{ route('shopIndex', ['category' => request()->category, 'sort' => 'low_high']) }}"><i class="bi bi-sort-up"></i></a>
+                            <a style="font-size: 1.2rem" href="{{ route('shopIndex', ['category' => request()->category, 'sort' => 'low_high', 'lang' => App::getLocale()]) }}"><i class="bi bi-sort-up"></i></a>
                         </div>
                     </div>
 
@@ -96,11 +96,11 @@
                         @forelse ($products as $product)
                             <div class="card border-0" style="width: 33%">
                                 <div class="card-body text-center">
-                                    <a class="text-dark text-decoration-none" href="{{ route('shopShow', ["product" => $product->slug]) }}">
+                                    <a class="text-dark text-decoration-none" href="{{ route('shopShow', ["product" => $product->slug, 'lang' => App::getLocale()]) }}">
                                         <img class="w-75" src='{{ $product->image && file_exists('storage/' . $product->image) ? asset('storage/' . $product->image) : asset('images/not-found.jpg') }}' alt="">
                                     </a>
 
-                                    <a class="text-dark text-decoration-none" href="{{ route('shopShow', ["product" => $product->slug]) }}">
+                                    <a class="text-dark text-decoration-none" href="{{ route('shopShow', ["product" => $product->slug, 'lang' => App::getLocale()]) }}">
                                         <p class="font-bold my-2">{{$product->name}}</p>
                                     </a>
 
@@ -109,7 +109,7 @@
                             </div>
 
                         @empty
-                            <div>No products were found.</div>
+                            <div>{{__('No products were found.')}}</div>
                         @endforelse
                     </div>
                 </div>

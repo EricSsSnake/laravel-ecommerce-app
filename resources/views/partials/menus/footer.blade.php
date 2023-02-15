@@ -1,6 +1,6 @@
 <div class="container w-75 d-flex justify-content-between align-items-center">
     <div>
-        <p class="lead m-0">Made with <i style="color: pink" class="bi bi-heart color-warning"></i> by Erfan</p>
+        <p class="lead m-0">{{__('Made with')}} <i style="color: pink" class="bi bi-heart color-warning"></i> {{__('by Erfan')}}</p>
     </div>
 
     <ul class="navbar-nav ms-auto my-1 d-flex justify-content-between flex-row align-items-center">

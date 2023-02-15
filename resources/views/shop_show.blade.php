@@ -3,15 +3,15 @@
         <div class="container w-75">
             <ul class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a class="text-decoration-none" href="{{ route('landingPage') }}">Home</a>
+                    <a class="text-decoration-none" href="{{ route('landingPage', App::getLocale()) }}">{{__('Home')}}</a>
                 </li>
 
                 <li class="breadcrumb-item">
-                    <a class="text-decoration-none" href="{{ route('shopIndex') }}">Shop</a>
+                    <a class="text-decoration-none" href="{{ route('shopIndex', App::getLocale()) }}">{{__('Shop')}}</a>
                 </li>
 
                 <li class="breadcrumb-item">
-                    <a class="text-muted text-decoration-none" href="{{ route('shopShow', ['product' => $product->slug]) }}">{{$product->name}}</a>
+                    <a class="text-muted text-decoration-none" href="{{ route('shopShow', ['product' => $product->slug, 'lang' => App::getLocale()]) }}">{{$product->name}}</a>
                 </li>
             </ul>
         </div>
@@ -59,12 +59,12 @@
                         {!! $product->description !!}
                     </p>
 
-                    <form action="{{ route('cartStore') }}" method="POST">
+                    <form action="{{ route('cartStore', App::getLocale()) }}" method="POST">
                         @csrf
                         <input type="hidden" name="name" value="{{$product->name}}">
                         <input type="hidden" name="price" value="{{$product->price}}">
                         <input type="hidden" name="id" value="{{$product->id}}">
-                        <button class="btn py-2 px-3 border border-2 rounded-0 border-secondary" type="submit">Add to Cart</button>
+                        <button class="btn py-2 px-3 border border-2 rounded-0 border-secondary" type="submit">{{__('Add to Cart')}}</button>
                     </form>
                 </div>
             </div>
