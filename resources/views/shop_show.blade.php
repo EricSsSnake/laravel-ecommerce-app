@@ -19,25 +19,23 @@
 
     <section class="my-5">
         <div class="container w-75 d-flex justify-content-between align-items-start">
-            <div>
+            <div class="w-75">
                 <div>
-                    <div>
-                       <img id="currentImage" class="active border border-2 rounded-0 p-5 w-75" src='{{ $product->image && file_exists('storage/' . $product->image) ? asset('storage/' . $product->image) : asset('images/not-found.jpg') }}' alt="">
-                    </div>
+                    <img id="currentImage" class="active border border-2 rounded-0 p-5 w-75" src='{{ $product->image && file_exists('storage/' . $product->image) ? asset('storage/' . $product->image) : asset('images/not-found.jpg') }}' alt="">
+                </div>
 
-                    <div class="product-images">
-                        <div class="product-thumbnails selected">
-                            <img class="w-75" src='{{ $product->image && file_exists('storage/' . $product->image) ? asset('storage/' . $product->image) : asset('images/not-found.jpg') }}' alt="">
-                        </div>
-                        
-                        @if ($product->images)
-                            @foreach (json_decode($product->images, true) as $image)
-                                <div class="d-flex align-items-center product-thumbnails">
-                                    <img class="w-75" src="{{ file_exists('storage/' . $image) ? asset('storage/' . $image) : asset('images/not-found.jpg') }}" alt="">
-                                </div>
-                            @endforeach
-                        @endif
+                <div class="product-images">
+                    <div class="product-thumbnails selected">
+                        <img class="w-75" src='{{ $product->image && file_exists('storage/' . $product->image) ? asset('storage/' . $product->image) : asset('images/not-found.jpg') }}' alt="">
                     </div>
+                    
+                    @if ($product->images)
+                        @foreach (json_decode($product->images, true) as $image)
+                            <div class="d-flex align-items-center product-thumbnails">
+                                <img class="w-75" src="{{ file_exists('storage/' . $image) ? asset('storage/' . $image) : asset('images/not-found.jpg') }}" alt="">
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
             </div>
 
