@@ -266,7 +266,7 @@
 <body>
     <nav class="navbar py-3 navbar-dark" style="background-color: #333">
         <div class="container w-75">
-            <a href="{{ route('landingPage') }}" class="navbar-brand" style="font-weight: 500">Erfan E-commerce</a>
+            <a href="{{ route('landingPage', App::getLocale()) }}" class="navbar-brand" style="font-weight: 500">Erfan E-commerce</a>
         </div>
     </nav>
 
@@ -418,13 +418,13 @@
                                 <div class="d-flex w-100 align-items-center justify-content-between border-top border-bottom border-1 p-3">
                                     <div class="d-flex justify-content-start align-items-center">
                                         <div class="w-25">
-                                            <a href="{{ route('shopShow', $item->model->slug) }}">
+                                            <a href="{{ route('shopShow', ['lang' => App::getLocale(), $item->model->slug]) }}">
                                                 <img class="w-100" src="{{ $item->model->image && file_exists('storage/' . $item->model->image) ? asset('storage/' . $item->model->image) : asset('images/not-found.jpg') }}" alt="">
                                             </a>
                                         </div>
             
                                         <div class="mx-3">
-                                            <a class="text-decoration-none text-dark" href="{{ route('shopShow', $item->model->slug) }}" style="font-weight: 700">{{$item->model->name}}
+                                            <a class="text-decoration-none text-dark" href="{{ route('shopShow', ['lang' => App::getLocale(), $item->model->slug]) }}" style="font-weight: 700">{{$item->model->name}}
                                             </a>
 
                                             <p class="text-muted">{{$item->model->details}}</p>
@@ -455,7 +455,7 @@
                                     <div class="d-flex align-items-center justify-content-start w-25">
                                         <span class="">Discount: ({{ session()->get('coupon')['code'] }})</span>
 
-                                        <form class="" action="{{ route('couponDestroy') }}" method="post" style="display: inline; box-shadow: none">
+                                        <form class="" action="{{ route('couponDestroy', App::getLocale()) }}" method="post" style="display: inline; box-shadow: none">
                                             @csrf
                                             @method('delete')
                                             <input class="btn" type="submit" value="Remove" name="submit" style="font-size: .8rem; font-weight: 500">
@@ -482,7 +482,7 @@
                         <div>
                             <div class="my-3" style="font-weight: 500">Have a Code?</div>
                             <div class="w-100">
-                                <form class="d-flex" action="{{ route('couponStore') }}" method="post">
+                                <form class="d-flex" action="{{ route('couponStore', App::getLocale()) }}" method="post">
                                     @csrf
                                     <input class="w-75 mx-1 py-2" type="text" name="coupon_code">
                                     <input class="w-25 py-2 btn border border-2 border-secondary" type="submit" value="Apply" name="submit">

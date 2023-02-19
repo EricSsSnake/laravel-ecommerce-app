@@ -17,6 +17,14 @@
                 font-weight: normal;
                 font-display: swap;
             }
+
+            p, h1, h2, h3, h4, h5, h6 {
+                text-align: end;
+            }
+
+            input::placeholder {
+                text-align: end;
+            }
         </style>
     @endif
 
@@ -25,9 +33,9 @@
     <title>{{__('Erfan e-commerce ')}}| {{ $title ?? "Welcome" }}</title>
 </head>
 <body>
-    <nav class="navbar py-3 navbar-expand-lg navbar-dark" style="background-color: {{$bg ?? "#212529"}}">
+    <nav class="navbar py-3 {{ Route::currentRouteName() == 'landingPage' ? 'px-5' : '' }} navbar-expand-lg navbar-dark" style="background-color: {{$bg ?? "#212529"}}">
         <div class="container w-75">
-            <a href="/" class="navbar-brand">{{__('Erfan E-commerce')}}</a>
+            <a href="{{ route('landingPage', App::getLocale()) }}" class="navbar-brand {{ Route::currentRouteName() == 'landingPage' ? 'px-4' : '' }}">{{__('Erfan E-commerce')}}</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
                 <span class="navbar-toggler-icon"></span>

@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('category');
         Schema::create('category', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();

@@ -2,6 +2,7 @@
 
 use App\Product;
 use TCG\Voyager\Facades\Voyager;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;

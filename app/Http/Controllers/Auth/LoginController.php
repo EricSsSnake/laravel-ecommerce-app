@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -42,7 +43,7 @@ class LoginController extends Controller
     {
         session()->put('previousUrl', url()->previous());
 
-        return view('auth.login');
+        return view('auth.login')->with(['lang' => App::getLocale()]);
     }
 
     public function redirectTo()

@@ -40,13 +40,13 @@
                     <div class="d-flex w-75 align-items-center justify-content-between border-top border-bottom border-1 p-3">
                         <div class="d-flex justify-content-start align-items-center">
                             <div>
-                                <a href="{{ route('shopShow', [$item->model->slug, 'lang' => App::getLocale()]) }}">
+                                <a href="{{ route('shopShow', ['lang' => App::getLocale() ,$item->model->slug]) }}">
                                     <img class="w-50" src="{{ $item->model->image && file_exists('storage/' . $item->model->image) ? asset('storage/' . $item->model->image) : asset('images/not-found.jpg') }}" alt="">
                                 </a>
                             </div>
 
                             <div>
-                                <a class="text-decoration-none text-dark" href="{{ route('shopShow', $item->model->slug) }}" style="font-weight: 700">{{$item->model->name}}
+                                <a class="text-decoration-none text-dark" href="{{ route('shopShow', ['lang' => App::getLocale(), $item->model->slug]) }}" style="font-weight: 700">{{$item->model->name}}
                                 </a>
                                 <p class="text-muted">{{$item->model->details}}</p>
                             </div>
@@ -55,14 +55,14 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="d-flex flex-column">
 
-                                <form action="{{ route('cartDestroy', $item->rowId) }}" method="POST">
+                                <form action="{{ route('cartDestroy', ['lang' => App::getLocale(), 'product' => $item->rowId]) }}" method="POST">
                                     @csrf
                                     @method('delete')
 
                                     <button class="btn btn-link text-decoration-none" style="color: #555; font-size: .9rem; font-weight: 500" type="submit">{{__('Remove')}}</button>
                                 </form>
 
-                                <form action="{{ route('cartSwitchToSaveForLater', $item->rowId) }}" method="POST">
+                                <form action="{{ route('cartSwitchToSaveForLater', ['lang' => App::getLocale(), 'product' => $item->rowId]) }}" method="POST">
                                     @csrf
 
                                     <button class="btn btn-link text-decoration-none" style="color: #555; font-size: .9rem; font-weight: 500" type="submit">{{__('Save for Later')}}</button>
@@ -86,7 +86,7 @@
                     </div>
                 @endforeach
             @else
-                <p>{{__('Your shopping cart is empty!')}}</p>
+                <p style="text-align: start">{{__('Your shopping cart is empty!')}}</p>
                 <a class="btn-primary btn p-3 rounded-0" href="{{ route('shopIndex', App::getLocale()) }}">
                     {{__('Continue Shopping')}}
                 </a>
@@ -132,13 +132,13 @@
                 <div class="d-flex w-75 align-items-center justify-content-between border-top border-bottom border-1 p-3">
                     <div class="d-flex justify-content-start align-items-center">
                         <div>
-                            <a href="{{ route('shopShow', $item->model->slug) }}">
+                            <a href="{{ route('shopShow', ['lang' => App::getLocale(), $item->model->slug]) }}">
                                 <img class="w-50" src="{{ $item->model->image && file_exists('storage/' . $item->model->image) ? asset('storage/' . $item->model->image) : asset('images/not-found.jpg') }}" alt="">
                             </a>
                         </div>
 
                         <div>
-                            <a class="text-decoration-none text-dark" href="{{ route('shopShow', $item->model->slug) }}" style="font-weight: 700">{{$item->model->name}}
+                            <a class="text-decoration-none text-dark" href="{{ route('shopShow', ['lang' => App::getLocale(), $item->model->slug]) }}" style="font-weight: 700">{{$item->model->name}}
                             </a>
                             <p class="text-muted">{{$item->model->details}}</p>
                         </div>
@@ -147,14 +147,14 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex flex-column">
 
-                            <form action="{{ route('saveForLaterDestroy', $item->rowId) }}" method="POST">
+                            <form action="{{ route('saveForLaterDestroy', ['lang' => App::getLocale(), $item->rowId]) }}" method="POST">
                                 @csrf
                                 @method('delete')
 
                                 <button class="btn btn-link text-decoration-none" style="color: #555; font-size: .9rem; font-weight: 500" type="submit">{{__('Remove')}}</button>
                             </form>
 
-                            <form action="{{ route('saveForLaterSwitchToCart', $item->rowId) }}" method="POST">
+                            <form action="{{ route('saveForLaterSwitchToCart', ['lang' => App::getLocale(), $item->rowId]) }}" method="POST">
                                 @csrf
 
                                 <button class="btn btn-link text-decoration-none" style="color: #555; font-size: .9rem; font-weight: 500" type="submit">{{__('Add to Cart')}}</button>
@@ -171,7 +171,7 @@
             @endforeach
 
             @else
-                <p>{{__('Nothing is Saved for Later!')}}</p>
+                <p style="text-align: start">{{__('Nothing is Saved for Later!')}}</p>
             @endif
         </div>
     </section>
@@ -187,7 +187,9 @@
         element.addEventListener('change', function() {
             const id = element.getAttribute('data-id')
 
-            axios.patch(`/cart/${id}`, {
+            const url = "{{url()->full()}}";
+            
+            axios.patch(url + '/' + `${id}`, {
                 quantity: this.value
             })
             .then(function (response) {

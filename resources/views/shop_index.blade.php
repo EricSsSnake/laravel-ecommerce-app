@@ -101,7 +101,7 @@
                                     </a>
 
                                     <a class="text-dark text-decoration-none" href="{{ route('shopShow', ["product" => $product->slug, 'lang' => App::getLocale()]) }}">
-                                        <p class="font-bold my-2">{{$product->name}}</p>
+                                        <p class="font-bold my-2" style="text-align: center">{{$product->name}}</p>
                                     </a>
 
                                     <span class="text-muted">{{'$'. $product->price / 100}}</span>

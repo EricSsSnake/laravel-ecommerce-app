@@ -1,7 +1,7 @@
 <x-layout :bg="'#4e4e4e'">
     <section class="text-light p-5 text-center text-sm-start" style="background-color: #4e4e4e">
         <div class="container w-75 d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-start flex-column">
+            <div class="d-flex flex-column align-items-start px-3 {{ App::isLocale('fa') ? 'align-items-end' : '' }}">
                 <h1 class="my-3 text-uppercase">{{__('Erfan E-commerce')}} <span class="text-warning"> {{__('Demo')}} </span></h1>
 
                 <p class="lead">
@@ -14,14 +14,14 @@
                 </div>
             </div>
 
-            <img class="img-fluid w-50 d-none d-sm-block" src="images/macbook-pro-laravel.png" alt="">
+            <img class="img-fluid w-50 d-none d-sm-block px-2" src="images/macbook-pro-laravel.png" alt="">
         </div>
     </section>
 
     <section>
         <div class="container my-5 text-center w-75">
             <h2>{{__('Erfan E-commerce')}}</h2>
-            <p class="mt-3 text-sm-start">{{__('Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit, cumque. Iusto voluptas voluptatibus sit repellendus cum! Vero est, nobis reprehenderit temporibus laboriosam error architecto quo.')}}</p>
+            <p class="mt-3">{{__('Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit, cumque. Iusto voluptas voluptatibus sit repellendus cum! Vero est, nobis reprehenderit temporibus laboriosam error architecto quo.')}}</p>
             <div class="mt-5">
                 <a href="" class="btn btn-link border-dark text-decoration-none text-dark">{{__('Featured')}}</a>
                 <a href="" class="mx-2 btn btn-link border-dark text-decoration-none text-dark">{{__('On Sale')}}</a>

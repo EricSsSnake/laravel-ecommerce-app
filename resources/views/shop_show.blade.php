@@ -19,7 +19,7 @@
 
     <section class="my-5">
         <div class="container w-75 d-flex justify-content-between align-items-start">
-            <div class="w-50">
+            <div>
                 <div>
                     <div>
                        <img id="currentImage" class="active border border-2 rounded-0 p-5 w-75" src='{{ $product->image && file_exists('storage/' . $product->image) ? asset('storage/' . $product->image) : asset('images/not-found.jpg') }}' alt="">
@@ -42,7 +42,7 @@
             </div>
 
             <div class="card border-0 w-50">
-                <div>
+                <div class="d-flex flex-column align-items-start {{ App::isLocale('fa') ? 'align-items-end' : '' }}">
                     <h3 class="mb-5">
                         {{$product->name}}
                     </h3>
@@ -59,7 +59,7 @@
                         {!! $product->description !!}
                     </p>
 
-                    <form action="{{ route('cartStore', App::getLocale()) }}" method="POST">
+                    <form action="{{ route('cartStore', ['lang' => App::getLocale()]) }}" method="POST">
                         @csrf
                         <input type="hidden" name="name" value="{{$product->name}}">
                         <input type="hidden" name="price" value="{{$product->price}}">

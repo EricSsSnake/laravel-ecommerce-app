@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('products');
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('featured')->default(true);
