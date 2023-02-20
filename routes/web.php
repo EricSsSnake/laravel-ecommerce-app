@@ -55,4 +55,6 @@ Route::group(['prefix' => '{lang}'], function () {
     Auth::routes();
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    Route::get('/search', [ProductController::class, 'search'])->name('searchResults');
 });

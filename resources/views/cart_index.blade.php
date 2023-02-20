@@ -10,6 +10,10 @@
                     <a class="text-muted text-decoration-none" href="{{ route('cartIndex', App::getLocale()) }}">{{__('Shopping Cart')}}</a>
                 </li>
             </ul>
+
+            <div>
+                @include('partials/search')
+            </div>
         </div>
     </section>
 

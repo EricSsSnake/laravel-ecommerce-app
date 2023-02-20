@@ -14,6 +14,10 @@
             </a>
         </li>
     @endforeach
+
+    <li>
+        <a href="{{ route('voyager.dashboard', App::getLocale()) }}">Admin</a>
+    </li>
 </ul>
 
 {{-- <ul class="navbar-nav ms-auto">

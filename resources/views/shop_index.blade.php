@@ -49,18 +49,40 @@
         <div class="container w-75">
             <ul class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a class="text-decoration-none" href="{{ route('landingPage', App::getLocale()) }}">{{__('Home')}}</a>
+                    <a class="text-decoration-none" href="{{ route('landingPage', App::getLocale()) }}">{{__('Home')}}</a>  
                 </li>
 
                 <li class="breadcrumb-item">
                     <a class="text-muted text-decoration-none" href="{{ route('shopIndex', App::getLocale()) }}">{{__('Shop')}}</a>
                 </li>
             </ul>
+
+            <div>
+                @include('partials/search')
+            </div>
         </div>
     </section>
     
 
     <section class="my-5">
+        <div class="container w-75">
+            @if (session()->has('success_message'))
+                <div class="p-3 mb-3 w-75" style="background-color: #dbedd2; color: #52634e">
+                    {{session()->get('success_message')}}
+                </div>
+            @endif
+
+            @if (count($errors) > 0)
+            <div class="p-3 mb-3"> 
+                <ul class="list-unstyled">
+                    @foreach ($errors->all() as $error)
+                        <li class="p-3 mb-3 w-75" style="background-color: #f0d9d8; color: #af8b88">>{{$error}}</li>                      
+                    @endforeach
+                </ul>
+            </div>
+            @endif  
+        </div>
+
         <div class="container w-75 d-flex justify-content-between">
             <div class="w-25">
                 <div class="mb-4">
