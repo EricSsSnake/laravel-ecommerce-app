@@ -15,8 +15,8 @@
         </li>
     @endforeach
 
-    <li>
-        <a href="{{ route('voyager.dashboard', App::getLocale()) }}">Admin</a>
+    <li class="nav-item mx-1">
+        <a class="nav-link" href="{{ route('voyager.dashboard', App::getLocale()) }}">Admin</a>
     </li>
 </ul>
 

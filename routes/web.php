@@ -48,13 +48,13 @@ Route::group(['prefix' => '{lang}'], function () {
     Route::post('/coupon', [CouponController::class, 'store'])->name('couponStore');
     Route::delete('/coupon', [CouponController::class, 'destroy'])->name('couponDestroy');
 
-    Route::group(['prefix' => 'admin'], function () {
-        Voyager::routes();
-    });
-
     Auth::routes();
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::get('/search', [ProductController::class, 'search'])->name('searchResults');
+});
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
 });

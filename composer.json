@@ -13,6 +13,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "nicolaslopezj/searchable": "*",
+        "spatie/laravel-translatable": "^6.3",
         "stripe/stripe-php": "^10.5",
         "tcg/voyager": "^1.6"
     },
